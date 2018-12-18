@@ -1,0 +1,17 @@
+.heatmap-container {
+    display: flex;
+    flex-direction: row;
+    .heatmap{
+        flex: 7;
+    }
+    .control-panel{
+        flex: 3;
+    }
+}
+
+.leaflet-container {
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+  }
+  

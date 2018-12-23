@@ -8,8 +8,6 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 export const apiHost = `https://dashboardapi.mcog.minuku.org`;
 
-console.log({apiHost});
-
 let DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,

@@ -22,8 +22,11 @@ class MinukuHeatmap extends Component {
     layerHidden: false,
     addressPoints: [],
     radius: 11,
-    blur: 7,
-    max: 0.5,
+    blur: 18,
+    max: 3.5,
+    maxZoom: 18,
+    minOpacity: 0.01,
+    intensity: 1,
     popupLat: null,
     popupLng: null,
     markerList: [],
@@ -143,14 +146,15 @@ class MinukuHeatmap extends Component {
           {!this.state.layerHidden &&
               <HeatmapLayer
                 fitBoundsOnLoad
-                fitBoundsOnUpdate
                 points={this.state.addressPoints}
                 longitudeExtractor={m => m[1]}
                 latitudeExtractor={m => m[0]}
                 gradient={gradient}
-                intensityExtractor={m => parseFloat(m[2])}
+                intensityExtractor={m => parseFloat(2)}
                 radius={Number(this.state.radius)}
                 blur={Number(this.state.blur)}
+                maxZoom={Number(this.state.maxZoom)}
+                minOpacity={Number.parseFloat(this.state.minOpacity)}
                 max={Number.parseFloat(this.state.max)}
               />
             }
@@ -162,47 +166,85 @@ class MinukuHeatmap extends Component {
         <div className="control-panel">
           <input
             type="button"
-            value="Toggle Map"
-            onClick={() => this.setState({ mapHidden: !this.state.mapHidden })}
-          />
-          <input
-            type="button"
             value="Toggle Layer"
             onClick={() => this.setState({ layerHidden: !this.state.layerHidden })}
           />
           <div>
             Radius
+            <br/>
             <input
               type="range"
               min={1}
               max={40}
               value={this.state.radius}
               onChange={(e) => this.setState({ radius: e.currentTarget.value })}
-            /> {this.state.radius}
+            /> <br/> {this.state.radius}
           </div>
-
+          <br/>
           <div>
             Blur
+            <br/>
             <input
               type="range"
               min={1}
-              max={20}
+              max={30}
               value={this.state.blur}
               onChange={(e) => this.setState({ blur: e.currentTarget.value })}
-            /> {this.state.blur}
+            /> <br/> {this.state.blur}
           </div>
-
+          <br/>
           <div>
             Max
+            <br/>
             <input
               type="range"
               min={0.1}
-              max={3}
+              max={5}
               step={0.1}
               value={this.state.max}
               onChange={(e) => this.setState({ max: e.currentTarget.value })}
-            /> {this.state.max}
+            /> <br/> {this.state.max}
           </div>
+          <br/>
+          <div>
+            maxZoom
+            <br/>
+            <input
+              type="range"
+              min={1}
+              max={36}
+              step={1}
+              value={this.state.maxZoom}
+              onChange={(e) => this.setState({ maxZoom: e.currentTarget.value })}
+            /> <br/> {this.state.maxZoom}
+          </div>
+          <br/>
+          <div>
+            minOpacity
+            <br/>
+            <input
+              type="range"
+              min={0}
+              max={0.2}
+              step={0.01}
+              value={this.state.minOpacity}
+              onChange={(e) => this.setState({ minOpacity: e.currentTarget.value })}
+            /> <br/> {this.state.minOpacity}
+          </div>
+          <br/>
+          <div>
+            intensity
+            <br/>
+            <input
+              type="range"
+              min={0.5}
+              max={5}
+              step={0.1}
+              value={this.state.intensity}
+              onChange={(e) => this.setState({ intensity: e.currentTarget.value })}
+            /> <br/> {this.state.intensity}
+          </div>
+          <br/>
           <div>
             userid:
             <input type="text" name="name" onChange={(e)=>{

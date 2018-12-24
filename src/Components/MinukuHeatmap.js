@@ -105,7 +105,11 @@ class MinukuHeatmap extends Component {
     const res = await axios.post(`${apiHost}/heatmap/removemarker`,{
       _id
     });
-    if(res.status!==200) return;
+    if(res.status!==200) {
+      alert('移除失敗');
+      return;
+    }
+    alert('移除成功');
     this.refetchMarkers();
   }
 
@@ -114,7 +118,11 @@ class MinukuHeatmap extends Component {
     const res = await axios.post(`${apiHost}/heatmap/addmarker`,{
       lat, lng, name, userId:curUserId,
     });
-    if(res.status!==200) return;
+    if(res.status!==200) {
+      alert(`新增地標失敗`);
+      return;
+    }
+    alert(`已經替userId:${curUserId}新增了地標:${name}`);
     this.refetchMarkers();
   }
 
